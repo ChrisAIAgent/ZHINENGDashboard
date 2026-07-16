@@ -1,0 +1,36 @@
+﻿# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+node_modules/
+dist/
+build/
+.wrangler/
+.dev.vars
+
+# Wrangler
+.mf/
+
+.dev.vars
+.wrangler/
+*.local
+# OAuth token（含加密 refresh_token，切勿提交）
+scripts/tokens.json
+
+# 本地记忆（项目专属，不进库）
+.workbuddy/

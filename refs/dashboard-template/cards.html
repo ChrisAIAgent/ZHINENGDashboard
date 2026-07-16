@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>卡片列表 - Matrix Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-4">
+<span class="iconify text-gray-500 cursor-pointer text-xl" data-icon="ri:menu-fold-line"></span>
+<h2 class="text-lg font-bold text-gray-800">云服务器实例列表</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-gray-100 p-1 rounded-lg">
+<button class="p-1.5 bg-white shadow rounded text-blue-600"><span class="iconify" data-icon="ri:layout-grid-line"></span></button>
+<button class="p-1.5 text-gray-400"><span class="iconify" data-icon="ri:list-unordered"></span></button>
+</div>
+<button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium">+ 创建实例</button>
+</div>
+</header>
+<!-- Main Cards Grid -->
+<div class="flex-1 overflow-y-auto p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+<!-- Navigation Shortcut 1 -->
+<a class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all p-6 text-white group relative" href="content-inspection.html">
+<div class="absolute right-[-10px] bottom-[-10px] opacity-10 group-hover:scale-110 transition-transform">
+<span class="iconify text-9xl" data-icon="ri:shield-check-line"></span>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+<span class="iconify text-xl" data-icon="ri:shield-check-line"></span>
+</div>
+<h4 class="text-xl font-bold mb-2">内容质检系统</h4>
+<p class="text-blue-100 text-sm">自动化 AI 内容审核与风险管控中心</p>
+</div>
+<div class="flex items-center gap-2 mt-8 font-semibold text-sm">
+                            立即前往 <span class="iconify" data-icon="ri:arrow-right-line"></span>
+</div>
+</div>
+</a>
+<!-- Navigation Shortcut 2 -->
+<a class="bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all p-6 text-white group relative" href="service-activation.html">
+<div class="absolute right-[-10px] bottom-[-10px] opacity-10 group-hover:scale-110 transition-transform">
+<span class="iconify text-9xl" data-icon="ri:rocket-line"></span>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+<span class="iconify text-xl" data-icon="ri:rocket-line"></span>
+</div>
+<h4 class="text-xl font-bold mb-2">服务快速开通</h4>
+<p class="text-emerald-100 text-sm">标准化资源申请与全流程审批追踪</p>
+</div>
+<div class="flex items-center gap-2 mt-8 font-semibold text-sm">
+                            提交申请 <span class="iconify" data-icon="ri:arrow-right-line"></span>
+</div>
+</div>
+</a>
+<!-- Navigation Shortcut 3 -->
+<a class="bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all p-6 text-white group relative" href="rule-prediction.html">
+<div class="absolute right-[-10px] bottom-[-10px] opacity-10 group-hover:scale-110 transition-transform">
+<span class="iconify text-9xl" data-icon="ri:magic-line"></span>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+<span class="iconify text-xl" data-icon="ri:magic-line"></span>
+</div>
+<h4 class="text-xl font-bold mb-2">智能规则预测</h4>
+<p class="text-purple-100 text-sm">基于大数据分析的业务流量预测调优</p>
+</div>
+<div class="flex items-center gap-2 mt-8 font-semibold text-sm">
+                            查看预测 <span class="iconify" data-icon="ri:arrow-right-line"></span>
+</div>
+</div>
+</a>
+<!-- Original Card 1 -->
+<div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+<span class="iconify text-2xl" data-icon="ri:server-line"></span>
+</div>
+<div class="overflow-hidden">
+<h4 class="font-bold text-gray-800 truncate">Production-DB-01</h4>
+<p class="text-xs text-gray-400">ID: i-8823472394</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">运行中</span>
+</div>
+<div class="grid grid-cols-2 gap-4 my-6">
+<div>
+<p class="text-xs text-gray-400 mb-1">CPU 使用率</p>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-gray-100 rounded-full">
+<div class="w-[45%] h-full bg-blue-500 rounded-full"></div>
+</div>
+<span class="text-xs font-semibold">45%</span>
+</div>
+</div>
+<div>
+<p class="text-xs text-gray-400 mb-1">内存</p>
+<p class="text-sm font-bold text-gray-800">16 GB / 32 GB</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[10px]">华东-上海</span>
+<span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[10px]">高带宽型</span>
+<span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[10px]">Ubuntu 22.04</span>
+</div>
+</div>
+<div class="border-t px-5 py-3 bg-gray-50 flex justify-between">
+<button class="text-xs font-semibold text-blue-600 hover:underline">远程连接</button>
+<div class="flex gap-4">
+<button class="text-xs font-semibold text-gray-500 hover:text-gray-800">监控</button>
+<button class="text-xs font-semibold text-gray-500 hover:text-red-500">重置</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-lg flex items-center justify-center">
+<span class="iconify text-2xl" data-icon="ri:cloud-line"></span>
+</div>
+<div class="overflow-hidden">
+<h4 class="font-bold text-gray-800 truncate">Web-Gateway-Edge</h4>
+<p class="text-xs text-gray-400">ID: i-1229481923</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-[10px] font-bold uppercase">警告</span>
+</div>
+<div class="grid grid-cols-2 gap-4 my-6">
+<div>
+<p class="text-xs text-gray-400 mb-1">CPU 使用率</p>
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-gray-100 rounded-full">
+<div class="w-[88%] h-full bg-orange-500 rounded-full"></div>
+</div>
+<span class="text-xs font-semibold text-orange-600">88%</span>
+</div>
+</div>
+<div>
+<p class="text-xs text-gray-400 mb-1">内存</p>
+<p class="text-sm font-bold text-gray-800">3.8 GB / 4 GB</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[10px]">华南-深圳</span>
+<span class="px-2 py-1 bg-gray-50 text-gray-500 rounded text-[10px]">边缘计算</span>
+</div>
+</div>
+<div class="border-t px-5 py-3 bg-gray-50 flex justify-between">
+<button class="text-xs font-semibold text-blue-600 hover:underline">扩容</button>
+<div class="flex gap-4">
+<button class="text-xs font-semibold text-gray-500 hover:text-gray-800">日志</button>
+<button class="text-xs font-semibold text-gray-500 hover:text-red-500">停止</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-gray-100 text-gray-400 rounded-lg flex items-center justify-center font-bold">BK</div>
+<div class="overflow-hidden">
+<h4 class="font-bold text-gray-800 truncate">Backup-Storage-Cold</h4>
+<p class="text-xs text-gray-400">ID: i-334411122</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-gray-100 text-gray-400 rounded text-[10px] font-bold uppercase">已关机</span>
+</div>
+<div class="py-12 flex flex-col items-center justify-center text-gray-300">
+<span class="iconify text-3xl mb-2" data-icon="ri:zzz-line"></span>
+<p class="text-xs font-medium">实例处于休眠中</p>
+</div>
+</div>
+<div class="border-t px-5 py-3 bg-gray-50 flex justify-between">
+<button class="text-xs font-semibold text-blue-600 hover:underline">启动实例</button>
+<button class="text-xs font-semibold text-gray-500">设置</button>
+</div>
+</div>
+<!-- Repeated Cards (8 in total as requested) ... -->
+<script>
+                    const cardContainer = document.querySelector('.grid');
+                    for(let i=4; i<=8; i++) {
+                        const card = `
+                        <div class="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group">
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center font-bold">S${i}</div>
+                                        <div class="overflow-hidden">
+                                            <h4 class="font-bold text-gray-800 truncate">Logic-Node-0${i}</h4>
+                                            <p class="text-xs text-gray-400">ID: i-99120${i}44</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">活跃</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 my-6">
+                                    <div><p class="text-xs text-gray-400 mb-1">健康值</p><p class="text-sm font-bold text-green-500">100 / 100</p></div>
+                                    <div><p class="text-xs text-gray-400 mb-1">运行时长</p><p class="text-sm font-bold text-gray-800">423 小时</p></div>
+                                </div>
+                            </div>
+                            <div class="border-t px-5 py-2 bg-gray-50 flex justify-center items-center">
+                                <button class="text-xs font-semibold text-gray-500 flex items-center gap-1"><span class="iconify text-sm" data-icon="ri:more-fill"></span> 管理实例</button>
+                            </div>
+                        </div>`;
+                        cardContainer.insertAdjacentHTML('beforeend', card);
+                    }
+                </script>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'cards';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+    </script>
+</body>
+</html>

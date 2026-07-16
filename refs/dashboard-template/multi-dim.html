@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>多维数据分析 - Matrix Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-4">
+<span class="iconify text-gray-500 cursor-pointer text-xl" data-icon="ri:menu-fold-line"></span>
+<nav class="flex text-sm text-gray-500">
+<ol class="flex items-center space-x-2">
+<li>智能决策</li>
+<li class="flex items-center space-x-2">
+<span class="iconify text-xs" data-icon="ri:arrow-right-s-line"></span>
+<span class="text-gray-900 font-medium">多维数据交互</span>
+</li>
+</ol>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2">
+<span class="iconify animate-pulse text-sm" data-icon="ri:sparkling-line"></span>
+                    AI 已扫描 2.4TB 数据，并发现 3 个异常节点
+                </div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Linkage Filters -->
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-white p-4 rounded-xl shadow-sm border">
+<p class="text-xs text-gray-400 uppercase font-bold mb-2">主维度选择</p>
+<select class="w-full border-none bg-gray-50 rounded p-2 text-sm font-medium focus:ring-0">
+<option>按产品系列分类 (Product)</option>
+<option>按地理区域分类 (Territory)</option>
+<option>按销售经理分类 (Manager)</option>
+</select>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border">
+<p class="text-xs text-gray-400 uppercase font-bold mb-2">数据颗粒度</p>
+<div class="flex gap-2">
+<button class="flex-1 bg-blue-600 text-white py-2 rounded text-xs font-semibold">天级</button>
+<button class="flex-1 bg-gray-50 text-gray-500 py-2 rounded text-xs font-semibold hover:bg-gray-100">周级</button>
+<button class="flex-1 bg-gray-50 text-gray-500 py-2 rounded text-xs font-semibold hover:bg-gray-100">月级</button>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border">
+<p class="text-xs text-gray-400 uppercase font-bold mb-2">联动范围</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-sm font-medium">同步所有图表</span>
+<div class="w-10 h-5 bg-blue-600 rounded-full flex items-center px-1">
+<div class="w-3 h-3 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-dashed flex items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-all">
+<span class="iconify text-blue-500 mr-2" data-icon="ri:add-circle-line"></span>
+<span class="text-sm text-blue-600 font-medium">自定义仪表盘布局</span>
+</div>
+</div>
+<!-- Drill-down & Linkage Simulation -->
+<div class="grid grid-cols-2 gap-6 h-[500px]">
+<div class="bg-white p-6 rounded-xl border shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-gray-800">各地区销售额占比 (点击省份下钻)</h3>
+<span class="text-xs text-blue-600 cursor-pointer">返回上一层级</span>
+</div>
+<div class="flex-1" id="mapChart"></div>
+</div>
+<div class="bg-white p-6 rounded-xl border shadow-sm flex flex-col">
+<h3 class="font-bold text-gray-800 mb-6">销售与毛利联动分析 (散点图)</h3>
+<div class="flex-1" id="scatterChart"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border shadow-sm">
+<h3 class="font-bold text-gray-800 mb-6">多指标雷达图 - 市场竞争力分析</h3>
+<div class="h-[400px]" id="radarChart"></div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'multi-dim';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+
+        // Map Chart Simulation
+        const map = echarts.init(document.getElementById('mapChart'));
+        map.setOption({
+            tooltip: { trigger: 'item' },
+            legend: { top: 'bottom' },
+            series: [{
+                name: '销售强度', type: 'pie', radius: [20, 140], center: ['50%', '50%'], roseType: 'area',
+                itemStyle: { borderRadius: 8 },
+                data: [
+                    { value: 40, name: '华东地区' },
+                    { value: 32, name: '华南地区' },
+                    { value: 28, name: '华北地区' },
+                    { value: 25, name: '西南地区' },
+                    { value: 20, name: '西北地区' },
+                    { value: 18, name: '华中地区' },
+                    { value: 12, name: '东北地区' }
+                ]
+            }]
+        });
+
+        // Scatter Chart
+        const scatter = echarts.init(document.getElementById('scatterChart'));
+        scatter.setOption({
+            grid: { top: 20, right: 20 },
+            xAxis: { name: '销售额', splitLine: { lineStyle: { type: 'dashed' } } },
+            yAxis: { name: '毛利率', splitLine: { lineStyle: { type: 'dashed' } } },
+            series: [{
+                symbolSize: 20,
+                data: [[10.0, 8.04], [8.0, 6.95], [13.0, 7.58], [9.0, 8.81], [11.0, 8.33], [14.0, 9.96], [6.0, 7.24], [4.0, 4.26], [12.0, 10.84], [7.0, 4.82], [5.0, 5.68]],
+                type: 'scatter',
+                itemStyle: { color: '#FAAD14' }
+            }]
+        });
+
+        // Radar Chart
+        const radar = echarts.init(document.getElementById('radarChart'));
+        radar.setOption({
+            radar: {
+                indicator: [
+                    { name: '研发能力', max: 100 },
+                    { name: '市场占有率', max: 100 },
+                    { name: '客户满意度', max: 100 },
+                    { name: '响应速度', max: 100 },
+                    { name: '品牌知名度', max: 100 },
+                    { name: '财务稳健性', max: 100 }
+                ]
+            },
+            series: [{
+                name: 'Matrix vs Benchmark',
+                type: 'radar',
+                data: [
+                    { value: [92, 85, 78, 95, 80, 88], name: 'Matrix 系统 (2026)', areaStyle: { color: 'rgba(24, 144, 255, 0.3)' } },
+                    { value: [70, 75, 82, 60, 85, 74], name: '行业标杆值 (Benchmark)', areaStyle: { color: 'rgba(82, 196, 26, 0.2)' } }
+                ]
+            }]
+        });
+
+        window.addEventListener('resize', () => { map.resize(); scatter.resize(); radar.resize(); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>实名认证 - 企业级智能管理后台 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+        .stepper-active { background-color: #3B82F6; border-color: #3B82F6; color: white; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-white">
+<header class="h-16 border-b flex items-center justify-between px-8 shrink-0">
+<span class="text-gray-400">个人设置 / 实名认证</span>
+<div class="flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">A</div>
+<span class="text-gray-700 font-medium text-sm">Admin User</span>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto bg-gray-50 flex justify-center py-12 px-4">
+<div class="max-w-4xl w-full">
+<!-- Progress Stepper -->
+<div class="flex items-center justify-between mb-12">
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 stepper-active rounded-full flex items-center justify-center font-bold z-10 shadow-lg">1</div>
+<p class="text-sm font-medium mt-3 text-blue-600">填写个人信息</p>
+<div class="absolute w-full h-[2px] bg-blue-500 top-5 left-1/2"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 bg-white border-2 border-gray-300 text-gray-400 rounded-full flex items-center justify-center font-bold z-10">2</div>
+<p class="text-sm font-medium mt-3 text-gray-500">上传证件照片</p>
+<div class="absolute w-full h-[2px] bg-gray-200 top-5 left-1/2"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 bg-white border-2 border-gray-300 text-gray-400 rounded-full flex items-center justify-center font-bold z-10">3</div>
+<p class="text-sm font-medium mt-3 text-gray-500">提交审核</p>
+</div>
+</div>
+<!-- Auth Form Card -->
+<div class="bg-white rounded-xl shadow-xl p-10 max-w-2xl mx-auto border border-gray-100">
+<h2 class="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-blue-600 pl-4">身份认证申请</h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-gray-900 uppercase tracking-tight">真实姓名</label>
+<input class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-gray-400" placeholder="请输入您的合法证件姓名" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-gray-900 uppercase tracking-tight">证件类型</label>
+<select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+<option>中华人民共和国身份证</option>
+<option>护照 (Passport)</option>
+<option>港澳居民来往内地通行证</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-gray-900 uppercase tracking-tight">证件号码</label>
+<input class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-gray-400" placeholder="请输入证件号码" type="text"/>
+</div>
+<div class="pt-4">
+<p class="text-xs text-center text-gray-400 mb-6 italic">提交认证即表示您同意《隐私权政策》并承诺所提供信息真实有效</p>
+<button class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-700 hover:scale-[1.01] transition-all flex items-center justify-center gap-2 group">
+                                下一步：上传证件
+                                <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="ri:arrow-right-line"></span>
+</button>
+</div>
+</div>
+<div class="mt-12 bg-gray-50 rounded-lg p-6 flex gap-4">
+<span class="iconify text-2xl text-orange-500 shrink-0" data-icon="ri:information-fill"></span>
+<div class="text-xs text-gray-500 leading-relaxed">
+<h4 class="font-bold text-gray-700 mb-2">认证说明</h4>
+<ul class="list-disc list-inside space-y-1">
+<li>认证审核通常在 12 小时内完成（双休日节假日除外）。</li>
+<li>请确保拍摄、扫描件的内容清晰可见。</li>
+<li>您的个人信息仅用于实名核实，系统将严格加密存储并保证隐私安全。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center">
+<p class="text-sm text-gray-500">如有疑问？请点击 <a class="text-blue-600 hover:underline" href="#">获取在线帮助</a></p>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'realname-auth';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+    </script>
+</body>
+</html>

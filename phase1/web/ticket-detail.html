@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ticket 详情 - 企业看板</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+  .sidebar-item-active { background-color: #1890FF; color: white; }
+</style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<div id="sidebar"></div>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+  <div class="flex items-center gap-4">
+    <nav aria-label="Breadcrumb" class="flex text-sm text-gray-500" id="breadcrumb"></nav>
+  </div>
+  <div class="flex items-center gap-6">
+    <span class="iconify text-gray-500 text-xl cursor-pointer" data-icon="ri:notification-3-line"></span>
+    <div class="h-4 w-[1px] bg-gray-200"></div>
+    <span class="text-sm font-medium text-gray-700" id="today"></span>
+  </div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6" id="page-body">
+  <div id="detail-loading" class="text-center py-12 text-gray-400">加载中...</div>
+  <div id="detail-content" class="hidden space-y-6">
+    <div class="bg-white p-6 rounded-xl border shadow-sm">
+      <div class="flex justify-between items-start">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-3 mb-2 flex-wrap">
+            <span class="text-xs text-gray-400 font-mono" id="d-id"></span>
+            <span id="d-category"></span>
+            <span id="d-status"></span>
+            <span id="d-priority"></span>
+          </div>
+          <h1 class="text-xl font-bold text-gray-900" id="d-subject"></h1>
+          <p class="text-sm text-gray-500 mt-2"><span class="iconify inline" data-icon="ri:arrow-right-line"></span> <span id="d-next-action"></span></p>
+        </div>
+        <a href="tickets.html" class="text-blue-600 text-sm hover:underline flex items-center gap-1 shrink-0 ml-4">
+          <span class="iconify" data-icon="ri:arrow-left-line"></span>返回列表
+        </a>
+      </div>
+      <div class="grid grid-cols-4 gap-4 mt-6 pt-6 border-t">
+        <div><p class="text-xs text-gray-400">经销商</p><p class="font-semibold text-gray-800 mt-1" id="d-dealer"></p></div>
+        <div><p class="text-xs text-gray-400">型号</p><p class="font-semibold text-gray-800 mt-1" id="d-model"></p></div>
+        <div><p class="text-xs text-gray-400">负责人</p><p class="font-semibold text-gray-800 mt-1" id="d-owner"></p></div>
+        <div><p class="text-xs text-gray-400">Aging</p><p class="font-semibold text-gray-800 mt-1" id="d-aging"></p></div>
+        <div><p class="text-xs text-gray-400">开单日期</p><p class="font-semibold text-gray-800 mt-1" id="d-open"></p></div>
+        <div><p class="text-xs text-gray-400">最后更新</p><p class="font-semibold text-gray-800 mt-1" id="d-lastupd"></p></div>
+        <div><p class="text-xs text-gray-400">邮件数</p><p class="font-semibold text-gray-800 mt-1" id="d-emails"></p></div>
+        <div><p class="text-xs text-gray-400">Conversation</p><p class="font-mono text-xs text-gray-500 mt-1 truncate" id="d-conv"></p></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl border shadow-sm">
+        <h3 class="font-bold text-gray-800 mb-4">处理时间线</h3>
+        <div class="space-y-4" id="d-timeline"></div>
+      </div>
+      <div class="col-span-2 bg-white p-6 rounded-xl border shadow-sm">
+        <h3 class="font-bold text-gray-800 mb-4">邮件对话</h3>
+        <div class="space-y-3" id="d-emails-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<script src="assets/common.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/mocks.js"></script>
+<script src="assets/api.js"></script>
+<script src="assets/sidebar.js"></script>
+<script src="pages/ticket-detail.js"></script>
+<script>imapAuth.init(); imapAuth.requireAuth();</script>
+</body>
+</html>

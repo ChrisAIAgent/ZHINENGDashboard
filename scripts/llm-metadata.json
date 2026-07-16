@@ -1,0 +1,11 @@
+{
+  "19f5184218255b29": {
+    "threadId": "19f5184218255b29",
+    "updatedAt": "2026-07-11T14:13:28.248Z",
+    "category": "Warranty",
+    "status": "Open",
+    "priority": "high",
+    "summary": "Agent test write",
+    "next_action": "Verify with curl"
+  }
+}

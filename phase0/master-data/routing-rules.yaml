@@ -1,0 +1,63 @@
+﻿# Owner 路由规则
+# 匹配顺序：从上到下，第一个匹配的规则生效
+# 字段：
+#   category     Service / Warranty / Sales / Parts / Technical
+#   dealer_code  匹配 dealers.csv 中的 dealer_code
+#   region       APAC / EMEA / AMER / ...
+#   priority     high / normal / low
+
+rules:
+  # ===== Service 类 =====
+  - name: "Service -> Service Team"
+    when:
+      category: Service
+    assign:
+      team_email: service-team@example.com
+      sla_hours: 48
+
+  - name: "Service Warranty -> Service Team"
+    when:
+      category: Service
+      keyword: warranty
+    assign:
+      team_email: service-team@example.com
+      sla_hours: 24
+      priority: high
+
+  # ===== Warranty 类 =====
+  - name: "Warranty -> Warranty Specialist"
+    when:
+      category: Warranty
+    assign:
+      team_email: warranty@example.com
+      sla_hours: 72
+
+  # ===== Sales 类 =====
+  - name: "Sales -> Dealer Owner"
+    when:
+      category: Sales
+    assign:
+      strategy: dealer_lookup   # 查 dealers.csv 用 sales_owner_email
+
+  # ===== Parts 类 =====
+  - name: "Parts -> Parts Team"
+    when:
+      category: Parts
+    assign:
+      team_email: parts@example.com
+      sla_hours: 24
+
+  # ===== Technical 类 =====
+  - name: "Technical -> Tech Support"
+    when:
+      category: Technical
+    assign:
+      team_email: tech-support@example.com
+      sla_hours: 24
+
+  # ===== 默认 fallback =====
+  - name: "Default -> Triage Queue"
+    when: {}
+    assign:
+      team_email: triage@example.com
+      sla_hours: 24

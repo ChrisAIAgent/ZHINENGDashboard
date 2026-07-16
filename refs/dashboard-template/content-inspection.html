@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>内容质检 - Matrix Admin 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+        .status-badge { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-4">
+<span class="iconify text-gray-500 cursor-pointer text-xl" data-icon="ri:menu-fold-line"></span>
+<nav class="flex text-sm text-gray-500">
+<ol class="flex items-center space-x-2">
+<li>业务管理</li>
+<li><span class="iconify text-xs" data-icon="ri:arrow-right-s-line"></span></li>
+<li>卡片列表</li>
+<li><span class="iconify text-xs" data-icon="ri:arrow-right-s-line"></span></li>
+<li class="text-gray-900 font-medium">内容质检</li>
+</ol>
+</nav>
+</div>
+<div class="flex items-center gap-4 font-medium text-sm text-gray-600">
+<span>2026年03月12日</span>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Stats Grid -->
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-white p-5 rounded-xl shadow-sm border">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm text-gray-500">今日质检总量</p>
+<h3 class="text-2xl font-bold mt-1">12,842</h3>
+</div>
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+<span class="iconify text-xl" data-icon="ri:file-list-3-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-xs text-green-600">
+<span class="iconify mr-1" data-icon="ri:arrow-up-line"></span>
+<span>较昨日上升 12%</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl shadow-sm border">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm text-gray-500">异常内容检出</p>
+<h3 class="text-2xl font-bold mt-1 text-red-500">429</h3>
+</div>
+<div class="p-2 bg-red-50 text-red-600 rounded-lg">
+<span class="iconify text-xl" data-icon="ri:error-warning-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-xs text-red-600">
+<span class="iconify mr-1" data-icon="ri:arrow-up-line"></span>
+<span>增幅 3.5%</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl shadow-sm border">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm text-gray-500">AI 自动通过率</p>
+<h3 class="text-2xl font-bold mt-1">96.4%</h3>
+</div>
+<div class="p-2 bg-green-50 text-green-600 rounded-lg">
+<span class="iconify text-xl" data-icon="ri:checkbox-circle-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-xs text-gray-400">
+<span>运行状态良好</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl shadow-sm border">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm text-gray-500">待人工复核</p>
+<h3 class="text-2xl font-bold mt-1">87</h3>
+</div>
+<div class="p-2 bg-orange-50 text-orange-600 rounded-lg">
+<span class="iconify text-xl" data-icon="ri:user-voice-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-xs text-orange-600">
+<span>急需处理: 12条</span>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-xl border shadow-sm col-span-2">
+<h3 class="font-bold text-gray-800 mb-4">近24小时质检趋势</h3>
+<div class="h-64" id="trendChart"></div>
+</div>
+<div class="bg-white p-6 rounded-xl border shadow-sm">
+<h3 class="font-bold text-gray-800 mb-4">异常类型分布</h3>
+<div class="h-64" id="pieChart"></div>
+</div>
+</div>
+<!-- Task List Table -->
+<div class="bg-white rounded-xl border shadow-sm">
+<div class="p-6 border-b flex justify-between items-center">
+<h3 class="font-bold text-gray-800">质检详情任务列表</h3>
+<div class="flex gap-2">
+<button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50">批量导出</button>
+<button class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">新增质检任务</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-gray-50 border-b text-xs text-gray-500 uppercase">
+<tr>
+<th class="py-4 px-6 font-semibold">任务ID</th>
+<th class="py-4 px-6 font-semibold">内容概述</th>
+<th class="py-4 px-6 font-semibold">质检分类</th>
+<th class="py-4 px-6 font-semibold">置信度</th>
+<th class="py-4 px-6 font-semibold">状态</th>
+<th class="py-4 px-6 font-semibold">提交时间</th>
+<th class="py-4 px-6 text-right font-semibold">操作</th>
+</tr>
+</thead>
+<tbody class="divide-y text-sm">
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6 font-mono text-gray-400">#INS-20260312-001</td>
+<td class="py-4 px-6">
+<p class="font-medium text-gray-800">关于 AI 后台前端框架的市场调研...</p>
+</td>
+<td class="py-4 px-6 text-gray-500">文本合规</td>
+<td class="py-4 px-6">
+<div class="w-24 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[98%]"></div>
+</div>
+<span class="text-[10px] text-gray-400">98.5%</span>
+</td>
+<td class="py-4 px-6">
+<span class="status-badge bg-green-100 text-green-700">自动通过</span>
+</td>
+<td class="py-4 px-6 text-gray-500">2026-03-12 14:20</td>
+<td class="py-4 px-6 text-right">
+<button class="text-blue-600 hover:underline">详情</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6 font-mono text-gray-400">#INS-20260312-002</td>
+<td class="py-4 px-6 text-gray-800 font-medium">图片素材审核 - 广告海报 (ad_campaign_v2.jpg)</td>
+<td class="py-4 px-6 text-gray-500">版权及暴力</td>
+<td class="py-4 px-6">
+<div class="w-24 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[42%]"></div>
+</div>
+<span class="text-[10px] text-gray-400">42.1%</span>
+</td>
+<td class="py-4 px-6">
+<span class="status-badge bg-red-100 text-red-700">高危预警</span>
+</td>
+<td class="py-4 px-6 text-gray-500">2026-03-12 13:45</td>
+<td class="py-4 px-6 text-right flex justify-end gap-3 font-medium">
+<button class="text-red-500 hover:text-red-600">拦截</button>
+<button class="text-blue-600 hover:underline">复核</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6 font-mono text-gray-400">#INS-20260312-003</td>
+<td class="py-4 px-6 text-gray-800 font-medium">用户评论内容 (ID: 9527)</td>
+<td class="py-4 px-6 text-gray-500">垃圾营销</td>
+<td class="py-4 px-6">
+<div class="w-24 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-orange-400 h-full w-[76%]"></div>
+</div>
+<span class="text-[10px] text-gray-400">76.8%</span>
+</td>
+<td class="py-4 px-6">
+<span class="status-badge bg-orange-100 text-orange-700">待复核</span>
+</td>
+<td class="py-4 px-6 text-gray-500">2026-03-12 13:10</td>
+<td class="py-4 px-6 text-right">
+<button class="text-blue-600 hover:underline">详情</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'content-inspection';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+
+        const trendChart = echarts.init(document.getElementById('trendChart'));
+        trendChart.setOption({
+            tooltip: { trigger: 'axis' },
+            grid: { left: '3%', right: '4%', bottom: '3%', top: '10%', containLabel: true },
+            xAxis: { type: 'category', data: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'], axisLine: { lineStyle: { color: '#E5E7EB' } } },
+            yAxis: { type: 'value', splitLine: { lineStyle: { type: 'dashed' } } },
+            series: [{
+                name: '质检量',
+                type: 'line',
+                smooth: true,
+                data: [1200, 800, 3500, 5200, 4800, 4100],
+                areaStyle: { opacity: 0.1 },
+                itemStyle: { color: '#3B82F6' }
+            }]
+        });
+
+        const pieChart = echarts.init(document.getElementById('pieChart'));
+        pieChart.setOption({
+            tooltip: { trigger: 'item' },
+            legend: { bottom: '0', left: 'center' },
+            series: [{
+                name: '异常分布',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: { borderRadius: 10, borderColor: '#fff' },
+                label: { show: false },
+                data: [
+                    { value: 1048, name: '垃圾信息' },
+                    { value: 735, name: '敏感词汇' },
+                    { value: 580, name: '合规性冲突' },
+                    { value: 484, name: '图片违规' }
+                ]
+            }]
+        });
+
+        window.addEventListener('resize', () => {
+            trendChart.resize();
+            pieChart.resize();
+        });
+    </script>
+</body>
+</html>

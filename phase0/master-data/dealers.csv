@@ -1,0 +1,4 @@
+﻿dealer_code,name,region,country,sales_owner_email,type,notes
+D001,示例经销商 A,APAC,CN,sales.a@example.com,authorized,请填写实际 Dealer
+D002,示例经销商 B,APAC,CN,sales.b@example.com,authorized,
+D003,示例经销商 C,EMEA,DE,sales.c@example.com,prospect,待授权

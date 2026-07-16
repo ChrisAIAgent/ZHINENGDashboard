@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>服务开通 - Matrix Admin 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+        .step-active { background-color: #3B82F6; color: white; }
+        .step-todo { background-color: #E5E7EB; color: #9CA3AF; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-4">
+<span class="iconify text-gray-500 cursor-pointer text-xl" data-icon="ri:menu-fold-line"></span>
+<nav class="flex text-sm text-gray-500">
+<ol class="flex items-center space-x-2">
+<li>业务管理</li>
+<li><span class="iconify text-xs" data-icon="ri:arrow-right-s-line"></span></li>
+<li>服务开通</li>
+</ol>
+</nav>
+</div>
+<div class="flex items-center gap-4 font-medium text-sm text-gray-600">
+<span>2026年03月12日</span>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 max-w-6xl mx-auto w-full">
+<div class="bg-white rounded-xl shadow-sm border p-8 mb-8">
+<h3 class="text-lg font-bold mb-8 flex items-center gap-2">
+<span class="iconify text-blue-600" data-icon="ri:edit-box-line"></span>
+                    服务开通申请流程
+                </h3>
+<!-- Steps Indicator -->
+<div class="flex items-center justify-between mb-12">
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 step-active rounded-full flex items-center justify-center font-bold relative z-10">1</div>
+<p class="text-xs font-semibold mt-2 text-blue-600">选择服务类型</p>
+<div class="absolute top-5 left-[60%] w-[80%] h-[2px] bg-blue-100"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 step-active rounded-full flex items-center justify-center font-bold relative z-10">2</div>
+<p class="text-xs font-semibold mt-2 text-blue-600">配置服务参数</p>
+<div class="absolute top-5 left-[60%] w-[80%] h-[2px] bg-gray-100"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 step-todo rounded-full flex items-center justify-center font-bold relative z-10 text-gray-500">3</div>
+<p class="text-xs font-semibold mt-2 text-gray-400">审批流程</p>
+<div class="absolute top-5 left-[60%] w-[80%] h-[2px] bg-gray-100"></div>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 step-todo rounded-full flex items-center justify-center font-bold relative z-10 text-gray-500">4</div>
+<p class="text-xs font-semibold mt-2 text-gray-400">开通成功</p>
+</div>
+</div>
+<!-- Form -->
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">服务全称</label>
+<input class="w-full px-4 py-2 border rounded-lg bg-gray-50" readonly="" type="text" value="Matrix AI 云处理集群 (Standard)"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">计费模式</label>
+<select class="w-full px-4 py-2 border rounded-lg">
+<option>按量付费 (0.12 CNY/min)</option>
+<option>包年包月 (2,999 CNY/mo)</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">部署区域</label>
+<select class="w-full px-4 py-2 border rounded-lg">
+<option>华东 1 (杭州)</option>
+<option>华南 2 (广州)</option>
+<option>华北 4 (北京)</option>
+</select>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">带宽上限</label>
+<div class="flex items-center gap-4">
+<input class="flex-1" type="range"/>
+<span class="text-sm font-medium">100 Mbps</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">冗余容灾等级</label>
+<div class="flex gap-2">
+<button class="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg text-xs font-bold">Standard</button>
+<button class="px-4 py-2 border rounded-lg text-xs font-bold text-gray-500 hover:bg-gray-50">High-Availability</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">申请备注 (可选)</label>
+<textarea class="w-full px-4 py-2 border rounded-lg h-20" placeholder="说明开通此服务的业务背景..."></textarea>
+</div>
+</div>
+</div>
+<div class="mt-10 pt-8 border-t flex justify-end gap-3">
+<button class="px-6 py-2 border rounded-lg hover:bg-gray-50">上一步</button>
+<button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">提交审批申请</button>
+</div>
+</div>
+<!-- Application Tracking -->
+<div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+<div class="px-8 py-5 border-b flex justify-between items-center">
+<h3 class="font-bold text-gray-800">审批进度追踪</h3>
+</div>
+<div class="p-8">
+<div class="relative border-l-2 border-blue-100 ml-4 pl-8 space-y-10">
+<div class="relative">
+<span class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-blue-600 ring-4 ring-blue-50"></span>
+<div class="flex justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-800">申请提交成功</h4>
+<p class="text-xs text-gray-500 mt-1">管理员: 张浩 (zhanghao@matrix.com)</p>
+</div>
+<span class="text-xs text-gray-400">2026-03-12 10:00:00</span>
+</div>
+</div>
+<div class="relative">
+<span class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-blue-600 ring-4 ring-blue-50"></span>
+<div class="flex justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-800">资源配额校验通过</h4>
+<p class="text-xs text-gray-500 mt-1">系统自动化审查中...</p>
+</div>
+<span class="text-xs text-gray-400">2026-03-12 10:05:22</span>
+</div>
+</div>
+<div class="relative">
+<span class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-gray-200"></span>
+<div class="flex justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-400">部门主管审批</h4>
+<p class="text-xs text-orange-500 mt-1 font-medium">正在等待审批中 (预计 2小时内)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'content-inspection';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+    </script>
+</body>
+</html>

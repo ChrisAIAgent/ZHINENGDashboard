@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>基础信息 - 分步表单 - Matrix Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+        .step-active { color: #1890FF; border-color: #1890FF; }
+        .step-done { color: #52C41A; border-color: #52C41A; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-4">
+<span class="iconify text-gray-500 cursor-pointer text-xl" data-icon="ri:menu-fold-line"></span>
+<nav class="flex text-sm text-gray-500">
+<ol class="flex items-center space-x-2">
+<li>表单页</li>
+<li class="flex items-center space-x-2">
+<span class="iconify text-xs" data-icon="ri:arrow-right-s-line"></span>
+<span class="text-gray-900 font-medium">分步表单 (基础信息)</span>
+</li>
+</ol>
+</nav>
+</div>
+<div class="text-sm text-gray-400 font-medium">2026年03月12日</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-4xl mx-auto">
+<div class="bg-white p-10 rounded-xl shadow-sm border">
+<!-- Steps Header -->
+<div class="flex items-center mb-12">
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold mb-2 step-active">1</div>
+<span class="text-sm font-medium text-blue-600">填写基础信息</span>
+<div class="absolute top-5 left-[60%] right-0 h-0.5 bg-gray-200"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center font-bold mb-2 text-gray-400">2</div>
+<span class="text-sm font-medium text-gray-400">设置输入渠道</span>
+<div class="absolute top-5 left-0 right-0 h-0.5 bg-gray-200"></div>
+<div class="absolute top-5 left-[60%] right-0 h-0.5 bg-gray-200"></div>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center font-bold mb-2 text-gray-400">3</div>
+<span class="text-sm font-medium text-gray-400">完成创建</span>
+</div>
+</div>
+<!-- Form Content -->
+<div class="max-w-xl mx-auto">
+<form action="form-channel.html" class="space-y-6" method="GET">
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">用户名称 <span class="text-red-500">*</span></label>
+<input class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="请输入用户真实姓名" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">联系邮箱 <span class="text-red-500">*</span></label>
+<input class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all" placeholder="example@matrix.com" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">所属部门</label>
+<select class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all appearance-none bg-no-repeat bg-[right_1rem_center]" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20d%3D%22M6%209l6%206%206-6%22/%3E%3C/svg%3E'); background-size: 1.25rem;">
+<option>技术部</option>
+<option>产品部</option>
+<option>市场部</option>
+<option>运营部</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-700 mb-2">角色权限</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
+<input checked="" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-700 uppercase">数据查看者</span>
+</label>
+<label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
+<input class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500" type="checkbox"/>
+<span class="ml-2 text-sm text-gray-700 uppercase">操作管理员</span>
+</label>
+</div>
+</div>
+<div class="pt-6 border-t flex justify-end">
+<button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-semibold shadow-sm flex items-center gap-2 transition-all" type="submit">
+                                    下一步：渠道设置
+                                    <span class="iconify" data-icon="ri:arrow-right-line"></span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'form-basic';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+    </script>
+</body>
+</html>

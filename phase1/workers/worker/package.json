@@ -1,0 +1,11 @@
+{
+  "name": "ticketing-worker",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.js",
+  "type": "module",
+  "dependencies": {
+    "imapflow": "^1.4.6",
+    "mailparser": "^3.9.14"
+  }
+}

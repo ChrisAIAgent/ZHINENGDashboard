@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>基础详情页 - 企业级智能管理后台 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Header -->
+<header class="h-16 bg-white border-b flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center gap-4">
+<span class="text-gray-400">详情页 / 基础详情页</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="iconify text-xl text-gray-500 cursor-pointer" data-icon="ri:notification-3-line"></span>
+<div class="flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">A</div>
+<span class="text-gray-700 font-medium text-sm">Admin User</span>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-5xl mx-auto space-y-6">
+<!-- Page Header -->
+<div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+<span class="iconify text-2xl" data-icon="ri:file-list-3-fill"></span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-gray-900 leading-tight">退款申请单 - REF20260312001</h1>
+<p class="text-sm text-gray-500 mt-1">创建时间：2026-03-12 10:24:00</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border rounded-md text-sm hover:bg-gray-50 transition-colors">取消订单</button>
+<button class="px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-shadow">审核通过</button>
+</div>
+</div>
+<!-- Basic Info -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b font-semibold text-gray-800">退款信息</div>
+<div class="p-6 grid grid-cols-3 gap-y-6 gap-x-12">
+<div><p class="text-sm text-gray-500 mb-1">取货单号</p><p class="text-sm text-gray-900">1000000000</p></div>
+<div><p class="text-sm text-gray-500 mb-1">状态</p><p class="text-sm text-blue-600">已取货</p></div>
+<div><p class="text-sm text-gray-500 mb-1">销售单号</p><p class="text-sm text-gray-900">1234123421</p></div>
+<div><p class="text-sm text-gray-500 mb-1">子订单</p><p class="text-sm text-gray-900">3214321432</p></div>
+</div>
+</div>
+<!-- User Info -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b font-semibold text-gray-800">用户信息</div>
+<div class="p-6 grid grid-cols-3 gap-y-6 gap-x-12">
+<div><p class="text-sm text-gray-500 mb-1">用户名</p><p class="text-sm text-gray-900">张三</p></div>
+<div><p class="text-sm text-gray-500 mb-1">联系电话</p><p class="text-sm text-gray-900">131 0000 0000</p></div>
+<div><p class="text-sm text-gray-500 mb-1">常用快递</p><p class="text-sm text-gray-900">顺丰快递</p></div>
+<div><p class="text-sm text-gray-500 mb-1">取货地址</p><p class="text-sm text-gray-900">浙江省杭州市西湖区</p></div>
+<div><p class="text-sm text-gray-500 mb-1">备注</p><p class="text-sm text-gray-900">无</p></div>
+</div>
+</div>
+<!-- Timeline / Records -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b font-semibold text-gray-800">流转记录</div>
+<div class="p-6">
+<div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 before:to-transparent">
+<!-- Timeline Item 1 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+<span class="iconify" data-icon="ri:check-line"></span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-gray-50 border border-gray-100">
+<div class="flex items-center justify-between space-x-2 mb-1">
+<div class="font-bold text-gray-800">创建申请</div>
+<time class="font-medium text-xs text-blue-600">2026-03-12 10:24</time>
+</div>
+<div class="text-sm text-gray-600 italic">用户提交了退款申请，等待后台审核人员处理。</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-200 text-gray-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+<span class="iconify" data-icon="ri:time-line"></span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-lg bg-gray-50 border border-gray-100">
+<div class="flex items-center justify-between space-x-2 mb-1">
+<div class="font-bold text-gray-800">审核中</div>
+<time class="font-medium text-xs text-gray-500">进行中</time>
+</div>
+<div class="text-sm text-gray-600 italic">运营专员正在核对退货商品及库存流转记录。</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'basic-detail';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+    </script>
+</body>
+</html>

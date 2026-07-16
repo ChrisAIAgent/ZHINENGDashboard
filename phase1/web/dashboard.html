@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ticket 看板 - 企业看板</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+  .sidebar-item-active { background-color: #1890FF; color: white; }
+</style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<div id="sidebar"></div>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+  <div class="flex items-center gap-4">
+    <nav aria-label="Breadcrumb" class="flex text-sm text-gray-500" id="breadcrumb"></nav>
+  </div>
+  <div class="flex items-center gap-6">
+    <span class="iconify text-gray-500 text-xl cursor-pointer" data-icon="ri:notification-3-line"></span>
+    <div class="h-4 w-[1px] bg-gray-200"></div>
+    <span class="text-sm font-medium text-gray-700" id="today"></span>
+  </div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6" id="page-body">
+  <div class="bg-white p-6 rounded-xl shadow-sm border flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+        <span class="iconify text-blue-600 text-3xl" data-icon="ri:dashboard-3-line"></span>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Ticket 看板</h1>
+        <p class="text-gray-500 mt-1" id="welcome-subtitle">加载中...</p>
+      </div>
+    </div>
+    <a href="tickets.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2" id="hero-cta">
+      <span class="iconify" data-icon="ri:list-check-2"></span>查看全部
+    </a>
+  </div>
+  <div id="auth-prompt" class="hidden bg-white p-6 rounded-xl border-2 border-dashed border-blue-200 shadow-sm">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
+        <span class="iconify text-blue-600 text-2xl" data-icon="ri:mail-line"></span>
+      </div>
+      <div class="flex-1">
+        <h3 class="font-semibold text-gray-900">连接 Gmail 邮箱开始同步</h3>
+        <p class="text-sm text-gray-500 mt-0.5">Gmail 已在后端授权，点击加载真实邮件生成 Ticket；也可切换演示模式查看样例。</p>
+      </div>
+      <button id="auth-prompt-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+        <span class="iconify" data-icon="ri:login-box-line"></span>选择数据源
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-4 gap-6" id="kpi-cards"></div>
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2 bg-white p-6 rounded-xl border shadow-sm">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-bold text-gray-800 text-lg">Ticket 趋势（最近 7 天）</h3>
+        <div class="flex items-center gap-4 text-xs">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 bg-blue-500 rounded-full"></span>新增</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 bg-green-500 rounded-full"></span>关闭</span>
+        </div>
+      </div>
+      <div class="h-[350px] w-full" id="trendChart"></div>
+    </div>
+    <div class="bg-white p-6 rounded-xl border shadow-sm flex flex-col">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-bold text-gray-800 text-lg">Overdue Top 5</h3>
+        <a class="text-blue-600 text-xs font-medium hover:underline" href="aging.html">查看全部</a>
+      </div>
+      <div class="space-y-3 flex-1" id="overdue-top"></div>
+    </div>
+  </div>
+  <div id="category-block" class="hidden">
+    <h2 class="text-lg font-bold text-gray-800 mb-4">按分类查看</h2>
+    <div class="grid grid-cols-4 gap-6" id="category-cards"></div>
+  </div>
+</div>
+</main>
+<script src="assets/common.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/mocks.js"></script>
+<script src="assets/api.js"></script>
+<script src="assets/sidebar.js"></script>
+<script src="pages/dashboard.js"></script>
+<script>
+  imapAuth.init();
+  document.getElementById('auth-prompt-btn').addEventListener('click', imapAuth.showModal);
+  if (!imapAuth.isAuthed()) {
+    document.getElementById('auth-prompt').classList.remove('hidden');
+    document.getElementById('hero-cta').classList.add('hidden');
+  }
+</script>
+</body>
+</html>

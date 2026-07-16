@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Owner 工作量 - 企业看板</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+  .sidebar-item-active { background-color: #1890FF; color: white; }
+</style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<div id="sidebar"></div>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+  <div class="flex items-center gap-4">
+    <nav aria-label="Breadcrumb" class="flex text-sm text-gray-500" id="breadcrumb"></nav>
+  </div>
+  <div class="flex items-center gap-6">
+    <span class="iconify text-gray-500 text-xl cursor-pointer" data-icon="ri:notification-3-line"></span>
+    <div class="h-4 w-[1px] bg-gray-200"></div>
+    <span class="text-sm font-medium text-gray-700" id="today"></span>
+  </div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+  <div id="loading" class="text-center py-12 text-gray-400">加载中...</div>
+  <div id="page-content" class="hidden space-y-6">
+    <div class="grid grid-cols-3 gap-6" id="summary-cards"></div>
+    <div>
+      <h2 class="text-lg font-bold text-gray-800 mb-4">负责人工作量（按 Active 数排序）</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="owner-cards"></div>
+    </div>
+  </div>
+</div>
+</main>
+<script src="assets/common.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/mocks.js"></script>
+<script src="assets/api.js"></script>
+<script src="assets/sidebar.js"></script>
+<script src="pages/owners.js"></script>
+<script>imapAuth.init(); imapAuth.requireAuth();</script>
+</body>
+</html>

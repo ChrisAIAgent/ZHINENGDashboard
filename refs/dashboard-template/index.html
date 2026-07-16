@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>工作台 - 企业级智能管理后台 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+        .sidebar-item-active { background-color: #1890FF; color: white; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-[#001529] text-gray-300 flex flex-col shrink-0">
+<div class="h-16 flex items-center px-6 gap-3">
+<div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+<span class="iconify text-white text-xl" data-icon="ri:dashboard-3-line"></span>
+</div>
+<span class="text-white font-bold text-lg tracking-wider">Matrix Admin</span>
+</div>
+<nav class="flex-1 mt-4 px-3 space-y-1 overflow-y-auto">
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="index" href="index.html">
+<span class="iconify mr-3" data-icon="ri:home-4-line"></span>
+<span class="text-sm font-medium">工作台</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="analysis" href="analysis.html">
+<span class="iconify mr-3" data-icon="ri:bar-chart-box-line"></span>
+<span class="text-sm font-medium">分析页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="multi-dim" href="multi-dim.html">
+<span class="iconify mr-3" data-icon="ri:node-tree"></span>
+<span class="text-sm font-medium">多维数据分析</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">业务应用</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="content-inspection" href="content-inspection.html">
+<span class="iconify mr-3" data-icon="ri:shield-check-line"></span>
+<span class="text-sm font-medium">内容质检</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="rule-prediction" href="rule-prediction.html">
+<span class="iconify mr-3" data-icon="ri:magic-line"></span>
+<span class="text-sm font-medium">规则预判</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">表单页</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-basic" href="form-basic.html">
+<span class="iconify mr-3" data-icon="ri:edit-box-line"></span>
+<span class="text-sm font-medium">基础表单</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="form-group" href="form-group.html">
+<span class="iconify mr-3" data-icon="ri:stack-line"></span>
+<span class="text-sm font-medium">分组表单</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">数据展示</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="table" href="table.html">
+<span class="iconify mr-3" data-icon="ri:table-alt-line"></span>
+<span class="text-sm font-medium">查询表格</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="cards" href="cards.html">
+<span class="iconify mr-3" data-icon="ri:layout-grid-line"></span>
+<span class="text-sm font-medium">卡片列表</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="basic-detail" href="basic-detail.html">
+<span class="iconify mr-3" data-icon="ri:file-list-3-line"></span>
+<span class="text-sm font-medium">基础详情页</span>
+</a>
+<div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-widest">结果与中心</div>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-success" href="result-success.html">
+<span class="iconify mr-3" data-icon="ri:checkbox-circle-line"></span>
+<span class="text-sm font-medium">成功页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="result-failure" href="result-failure.html">
+<span class="iconify mr-3" data-icon="ri:error-warning-line"></span>
+<span class="text-sm font-medium">失败页</span>
+</a>
+<a class="flex items-center px-4 py-3 hover:bg-white/10 rounded-md transition-all nav-item" data-page="profile-center" href="profile-center.html">
+<span class="iconify mr-3" data-icon="ri:user-settings-line"></span>
+<span class="text-sm font-medium">个人中心</span>
+</a>
+</nav>
+</aside><!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+<div class="flex items-center gap-4">
+<span class="iconify text-gray-500 cursor-pointer text-xl" data-icon="ri:menu-fold-line"></span>
+<nav aria-label="Breadcrumb" class="flex text-sm text-gray-500">
+<ol class="flex items-center space-x-2">
+<li>首页</li>
+<li class="flex items-center space-x-2">
+<span class="iconify text-xs" data-icon="ri:arrow-right-s-line"></span>
+<span class="text-gray-900 font-medium">工作台</span>
+</li>
+</ol>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="iconify text-gray-500 text-xl cursor-pointer" data-icon="ri:notification-3-line"></span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+</div>
+<span class="iconify text-gray-500 text-xl cursor-pointer" data-icon="ri:search-line"></span>
+<div class="h-4 w-[1px] bg-gray-200"></div>
+<div class="flex items-center gap-2 cursor-pointer">
+<span class="text-sm font-medium text-gray-700">2026年03月12日</span>
+</div>
+</div>
+</header>
+<!-- Tabs -->
+<div class="h-10 bg-white border-b flex items-center px-4 gap-1 shrink-0 overflow-x-auto whitespace-nowrap scrollbar-hide">
+<div class="px-3 py-1 bg-blue-50 text-blue-600 border border-blue-200 rounded text-xs flex items-center gap-2 cursor-pointer">
+<span>工作台</span>
+</div>
+<div class="px-3 py-1 hover:bg-gray-100 text-gray-500 rounded text-xs flex items-center gap-2 cursor-pointer border border-transparent">
+<span>销售分析</span>
+<span class="iconify text-gray-400 hover:text-gray-600" data-icon="ri:close-line"></span>
+</div>
+<div class="px-3 py-1 hover:bg-gray-100 text-gray-500 rounded text-xs flex items-center gap-2 cursor-pointer border border-transparent">
+<span>资产列表</span>
+<span class="iconify text-gray-400 hover:text-gray-600" data-icon="ri:close-line"></span>
+</div>
+</div>
+<!-- Scrollable Body -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Welcome Section -->
+<div class="bg-white p-6 rounded-xl shadow-sm border flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+<span class="iconify text-blue-600 text-3xl" data-icon="ri:user-smile-line"></span>
+</div>
+<div>
+<h1 class="text-2xl font-bold text-gray-900">早安，管理员。</h1>
+<p class="text-gray-500 mt-1">今天是你加入 Matrix 的第 512 天，目前有 8 项待办任务需要你处理。</p>
+</div>
+</div>
+<div class="flex gap-12 mr-8 text-right">
+<div>
+<p class="text-sm text-gray-400">待办任务</p>
+<p class="text-2xl font-semibold text-gray-800">8 / 12</p>
+</div>
+<div>
+<p class="text-sm text-gray-400">今日消息</p>
+<p class="text-2xl font-semibold text-gray-800">24</p>
+</div>
+<div>
+<p class="text-sm text-gray-400">系统指数</p>
+<p class="text-2xl font-semibold text-green-500">98%</p>
+</div>
+</div>
+</div>
+<!-- KPI Statistics -->
+<div class="grid grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-white p-5 rounded-xl border shadow-sm group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-medium text-gray-500">本月交易总额</p>
+<h3 class="text-2xl font-bold mt-2 text-gray-900">¥ 1,284,500.00</h3>
+</div>
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
+<span class="iconify text-xl" data-icon="ri:money-cny-box-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-sm">
+<span class="text-green-500 flex items-center font-medium">
+<span class="iconify mr-1" data-icon="ri:arrow-right-up-line"></span>
+                            12.5%
+                        </span>
+<span class="text-gray-400 ml-2">较上月同期</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-5 rounded-xl border shadow-sm group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-medium text-gray-500">活跃用户数</p>
+<h3 class="text-2xl font-bold mt-2 text-gray-900">42,893</h3>
+</div>
+<div class="p-2 bg-purple-50 text-purple-600 rounded-lg group-hover:bg-purple-600 group-hover:text-white transition-colors">
+<span class="iconify text-xl" data-icon="ri:user-heart-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-sm">
+<span class="text-green-500 flex items-center font-medium">
+<span class="iconify mr-1" data-icon="ri:arrow-right-up-line"></span>
+                            8.2%
+                        </span>
+<span class="text-gray-400 ml-2">较昨日</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-5 rounded-xl border shadow-sm group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-medium text-gray-500">API 响应时间</p>
+<h3 class="text-2xl font-bold mt-2 text-gray-900">128 ms</h3>
+</div>
+<div class="p-2 bg-green-50 text-green-600 rounded-lg group-hover:bg-green-600 group-hover:text-white transition-colors">
+<span class="iconify text-xl" data-icon="ri:flashlight-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-sm">
+<span class="text-red-500 flex items-center font-medium">
+<span class="iconify mr-1" data-icon="ri:arrow-right-down-line"></span>
+                            4.1%
+                        </span>
+<span class="text-gray-400 ml-2">较均值优化</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-5 rounded-xl border shadow-sm group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-sm font-medium text-gray-500">异常工单</p>
+<h3 class="text-2xl font-bold mt-2 text-gray-900">12</h3>
+</div>
+<div class="p-2 bg-orange-50 text-orange-600 rounded-lg group-hover:bg-orange-600 group-hover:text-white transition-colors">
+<span class="iconify text-xl" data-icon="ri:error-warning-line"></span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-sm text-gray-400">
+<span>待处理: 5 </span>
+<span class="mx-2">|</span>
+<span>处理中: 7 </span>
+</div>
+</div>
+</div>
+<!-- Charts and Tasks -->
+<div class="grid grid-cols-3 gap-6">
+<!-- Main Activity Chart -->
+<div class="col-span-2 bg-white p-6 rounded-xl border shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-gray-800 text-lg">业务流量趋势</h3>
+<div class="flex bg-gray-100 p-1 rounded-lg">
+<button class="px-3 py-1 text-xs font-medium bg-white rounded shadow-sm text-gray-800">周</button>
+<button class="px-3 py-1 text-xs font-medium text-gray-500 hover:text-gray-800">月</button>
+<button class="px-3 py-1 text-xs font-medium text-gray-500 hover:text-gray-800">年</button>
+</div>
+</div>
+<div class="h-[350px] w-full" id="trafficChart"></div>
+</div>
+<!-- To-do List -->
+<div class="bg-white p-6 rounded-xl border shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-gray-800 text-lg">待办任务</h3>
+<a class="text-blue-600 text-xs font-medium hover:underline" href="#">管理全部</a>
+</div>
+<div class="space-y-4 flex-1">
+<div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg group cursor-pointer hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border shadow-sm text-blue-500">
+<span class="iconify text-xl" data-icon="ri:file-list-3-line"></span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-gray-800">审批 Q1 采购申请</p>
+<p class="text-xs text-gray-500 mt-1">截止日期: 今天 18:00</p>
+</div>
+<span class="px-2 py-1 bg-red-100 text-red-600 rounded text-[10px] font-bold">加急</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg group cursor-pointer hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border shadow-sm text-orange-500">
+<span class="iconify text-xl" data-icon="ri:shake-hands-line"></span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-gray-800">年度供应商大会筹备</p>
+<p class="text-xs text-gray-500 mt-1">需更新 PPT 内容</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg group cursor-pointer hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border shadow-sm text-green-500">
+<span class="iconify text-xl" data-icon="ri:shield-keyhole-line"></span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-gray-800">核心数据库安全加固</p>
+<p class="text-xs text-gray-500 mt-1">进度: 45%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg group cursor-pointer hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border shadow-sm text-gray-400">
+<span class="iconify text-xl" data-icon="ri:settings-4-line"></span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold text-gray-800">系统常规维护更新</p>
+<p class="text-xs text-gray-500 mt-1">计划于凌晨 02:00 开始</p>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-2 bg-blue-600 text-white rounded-lg font-medium text-sm hover:bg-blue-700 transition-colors">
+                        创建新任务
+                    </button>
+</div>
+</div>
+<!-- Latest Logs Table -->
+<div class="bg-white p-6 rounded-xl border shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-gray-800 text-lg">最近操作记录</h3>
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+<span class="iconify" data-icon="ri:search-line"></span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all" placeholder="搜索操作记录..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-gray-400 text-xs uppercase tracking-wider border-b border-gray-100 px-4">
+<th class="pb-4 font-semibold px-4">操作员</th>
+<th class="pb-4 font-semibold px-4">操作类型</th>
+<th class="pb-4 font-semibold px-4">内容</th>
+<th class="pb-4 font-semibold px-4">状态</th>
+<th class="pb-4 font-semibold px-4 text-right">时间</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-gray-50">
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="py-4 px-4 flex items-center gap-2">
+<div class="w-7 h-7 bg-indigo-500 rounded-full flex items-center justify-center text-white text-[10px]">ZH</div>
+<span class="text-gray-700 font-medium">张浩 (运维主管)</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">数据导出</span>
+</td>
+<td class="py-4 px-4 text-gray-500 italic">导出 2026 Q1 全球销售报告</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1.5 text-green-600 font-medium">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                        处理成功
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right text-gray-400">10:42:15</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="py-4 px-4 flex items-center gap-2">
+<img alt="L" class="w-7 h-7 rounded-full" src="https://modao.cc/agent-py/media/generated_images/2026-03-12/881127f7719f49f9ba7de81bb0244e82.jpg"/>
+<span class="text-gray-700 font-medium">李明 (系统架构)</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">权限变更</span>
+</td>
+<td class="py-4 px-4 text-gray-500 italic">更新前端组 API 读写权限控制表</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1.5 text-green-600 font-medium">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                        处理成功
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right text-gray-400">09:30:02</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="py-4 px-4 flex items-center gap-2">
+<div class="w-7 h-7 bg-emerald-500 rounded-full flex items-center justify-center text-white text-[10px]">WS</div>
+<span class="text-gray-700 font-medium">王思 (安全工程师)</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2 py-1 bg-red-100 text-red-600 rounded text-xs">安全拦截</span>
+</td>
+<td class="py-4 px-4 text-gray-500 italic">拦截来自 210.12.x.x 的恶意登录尝试</td>
+<td class="py-4 px-4">
+<span class="flex items-center gap-1.5 text-orange-600 font-medium">
+<span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                                        自动拦截
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right text-gray-400">08:15:33</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Set Sidebar Active State
+        const currentPage = 'index';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.getAttribute('data-page') === currentPage) {
+                item.classList.add('sidebar-item-active');
+                item.classList.remove('hover:bg-white/10');
+            }
+        });
+
+        // Data Visualization
+        const trafficChart = echarts.init(document.getElementById('trafficChart'));        const option = {
+            tooltip: { trigger: 'axis', axisPointer: { type: 'cross', label: { backgroundColor: '#6a7985' } } },
+            grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+            xAxis: [{ type: 'category', boundaryGap: false, data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'], axisLine: { lineStyle: { color: '#E5E7EB' } }, axisLabel: { color: '#9CA3AF' } }],
+            yAxis: [{ type: 'value', axisLabel: { color: '#9CA3AF' }, splitLine: { lineStyle: { type: 'dashed', color: '#F3F4F6' } } }],
+            series: [
+                {
+                    name: '实时流量',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: { width: 3, color: '#3B82F6' },
+                    showSymbol: false,
+                    areaStyle: {
+                        opacity: 0.1,
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#3B82F6' }, { offset: 1, color: '#fff' }])
+                    },
+                    emphasis: { focus: 'series' },
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '预测趋势',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: { width: 2, color: '#10B981', type: 'dashed' },
+                    showSymbol: false,
+                    data: [150, 180, 160, 190, 200, 250, 280]
+                }
+            ]
+        };
+        trafficChart.setOption(option);
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            trafficChart.resize();
+        });
+    </script>
+</body>
+</html>

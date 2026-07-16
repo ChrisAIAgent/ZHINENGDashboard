@@ -1,0 +1,31 @@
+{
+  "threads": [
+    {
+      "threadId": "sample-warranty-001",
+      "subject": "Warranty claim for SW240UF excavator - hydraulic pump failure",
+      "from": "john@mountaintopeq.com",
+      "to": ["support@sunwardamerica.com", "warranty@sunwardamerica.com"],
+      "date": "2026-07-09T14:30:00Z",
+      "messageCount": 3,
+      "body": "Hi Sunward Support,\n\nOur customer reports that the SW240UF excavator (SN: SW240-2025-0892, 380 hours) has a hydraulic pump making abnormal noise and losing pressure. Machine was delivered 4 months ago and is still under warranty.\n\nThe dealer technician inspected on-site and confirmed the pump is failing. We need a replacement pump under warranty claim #MT-2026-071. Customer cannot operate without this unit - it's their primary machine for a large site project.\n\nPlease advise on claim approval and parts availability ASAP.\n\nRegards,\nJohn Miller\nService Manager, Mountaintop Equipment"
+    },
+    {
+      "threadId": "sample-parts-001",
+      "subject": "Quote needed - SWE155UF track assembly and sprockets",
+      "from": "sarah@abceq.com",
+      "to": ["parts@sunwardamerica.com"],
+      "date": "2026-07-10T09:15:00Z",
+      "messageCount": 2,
+      "body": "Parts Team,\n\nNeed pricing and availability for the following:\n- 2x Track Assembly (complete) for SWE155UF, Part# 240155089234\n- 4x Drive Sprockets, Part# 240155112456\n- 1x Final Drive Motor Seal Kit, Part# 240155098761\n\nCustomer: Texas Earthworks, they have 2 SWE155UF units due for undercarriage replacement.\n\nPlease quote with lead time. They want to schedule the work for next week.\n\nThanks,\nSarah Chen\nParts Coordinator, ABC Equipment"
+    },
+    {
+      "threadId": "sample-service-001",
+      "subject": "Urgent - SWE215UF boom cylinder leaking on site",
+      "from": "mike@lonestarconst.com",
+      "to": ["service@sunwardamerica.com"],
+      "date": "2026-07-11T07:00:00Z",
+      "messageCount": 5,
+      "body": "Service Team,\n\nWe have a SWE215UF (SN: SWE215-2024-1567) with a leaking boom cylinder at a job site in Dallas. Machine is currently stopped and the contractor is losing money. We need a field service tech dispatched today if possible.\n\nSerial number confirmed. The cylinder appears to have a seal failure at the rod end - hydraulic fluid is dripping continuously. Machine has 1200 hours and is past the standard warranty period.\n\nPlease advise what we can do immediately - can we get a seal kit and field service? Customer is very upset, this is a critical deadline project.\n\nUrgent - please call me at 214-555-0189.\n\nMike Rodriguez\nField Service Manager, Lone Star Construction"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "node-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "dependencies": {
+    "undici": "^6.21.0"
+  }
+}

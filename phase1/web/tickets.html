@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ticket 列表 - 企业看板</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body { font-family: 'Inter', 'Microsoft YaHei', sans-serif; background-color: #F0F2F5; }
+  .sidebar-item-active { background-color: #1890FF; color: white; }
+</style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<div id="sidebar"></div>
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0">
+  <div class="flex items-center gap-4">
+    <nav aria-label="Breadcrumb" class="flex text-sm text-gray-500" id="breadcrumb"></nav>
+  </div>
+  <div class="flex items-center gap-6">
+    <span class="iconify text-gray-500 text-xl cursor-pointer" data-icon="ri:notification-3-line"></span>
+    <div class="h-4 w-[1px] bg-gray-200"></div>
+    <span class="text-sm font-medium text-gray-700" id="today"></span>
+  </div>
+</header>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+  <div class="bg-white p-5 rounded-xl border shadow-sm">
+    <div class="grid grid-cols-5 gap-4">
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">分类</label>
+        <select id="f-category" class="w-full border border-gray-200 rounded-md px-3 py-2 text-sm bg-white">
+          <option value="">全部</option>
+          <option>Service</option><option>Warranty</option><option>Sales</option><option>Parts</option><option>Technical</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">状态</label>
+        <select id="f-status" class="w-full border border-gray-200 rounded-md px-3 py-2 text-sm bg-white">
+          <option value="">全部</option>
+          <option>Open</option><option>Pending</option><option>Waiting Dealer</option><option>Waiting HQ</option><option>Closed</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">负责人</label>
+        <select id="f-owner" class="w-full border border-gray-200 rounded-md px-3 py-2 text-sm bg-white"></select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">经销商</label>
+        <select id="f-dealer" class="w-full border border-gray-200 rounded-md px-3 py-2 text-sm bg-white"></select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 mb-1 block">搜索</label>
+        <input id="f-q" type="text" placeholder="ID 或主题..." class="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"/>
+      </div>
+    </div>
+    <div class="flex items-center justify-end gap-3 mt-4 pt-4 border-t">
+      <button id="btn-reset" class="px-4 py-2 bg-gray-50 border text-gray-600 rounded-md text-sm font-medium hover:bg-gray-100">重置</button>
+      <button id="btn-search" class="px-6 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700">查询</button>
+    </div>
+  </div>
+  <div class="bg-white rounded-xl border shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b flex justify-between items-center bg-gray-50/50">
+      <div class="flex items-center gap-4">
+        <h3 class="font-bold text-gray-800">Ticket 列表</h3>
+        <span id="total-badge" class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-0.5 rounded-full">—</span>
+      </div>
+      <span class="iconify text-gray-400 cursor-pointer text-lg" data-icon="ri:refresh-line" onclick="location.reload()"></span>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left whitespace-nowrap">
+        <thead class="text-xs text-gray-400 uppercase tracking-wider font-bold bg-gray-50/30">
+          <tr>
+            <th class="px-6 py-4">Ticket ID</th>
+            <th class="px-6 py-4">主题</th>
+            <th class="px-6 py-4">分类</th>
+            <th class="px-6 py-4">经销商 / 型号</th>
+            <th class="px-6 py-4">负责人</th>
+            <th class="px-6 py-4">状态</th>
+            <th class="px-6 py-4">Aging</th>
+            <th class="px-6 py-4">最近更新</th>
+          </tr>
+        </thead>
+        <tbody id="ticket-tbody" class="text-sm divide-y divide-gray-50"></tbody>
+      </table>
+    </div>
+    <div class="px-6 py-4 border-t flex justify-between items-center text-sm text-gray-500">
+      <div id="page-info">—</div>
+      <div class="flex gap-2" id="pagination"></div>
+    </div>
+  </div>
+</div>
+</main>
+<script src="assets/common.js"></script>
+<script src="assets/auth.js"></script>
+<script src="assets/mocks.js"></script>
+<script src="assets/api.js"></script>
+<script src="assets/sidebar.js"></script>
+<script src="pages/tickets.js"></script>
+<script>imapAuth.init(); imapAuth.requireAuth();</script>
+</body>
+</html>
