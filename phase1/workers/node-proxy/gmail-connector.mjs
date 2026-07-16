@@ -137,26 +137,93 @@ function parseAddressList(header) {
   return header.split(',').map(s => s.trim()).filter(Boolean).map(parseAddress);
 }
 
-// ---------- 从 payload 抽取纯文本正文 ----------
-function extractText(payload) {
+// ---------- 字符集识别与解码 ----------
+function getCharset(payload) {
+  const mt = payload?.mimeType || '';
+  let m = mt.match(/charset=([^;\s"']+)/i);
+  if (m) return m[1];
+  const ct = (payload?.headers || []).find(h => h.name.toLowerCase() === 'content-type');
+  if (ct) { m = ct.value.match(/charset=([^;\s"']+)/i); if (m) return m[1]; }
+  return 'utf-8';
+}
+
+// 按邮件声明的 charset 解码 base64url 正文。
+// 关键点：Gmail 的 body.data 只解码了传输编码(quoted-printable/base64)，
+// 不做 charset 转码；中文邮件常用 GBK/GB2312/Big5，必须显式转码，否则按 UTF-8 硬解会乱码。
+function decodeBytes(data, charset) {
+  let buf;
+  try { buf = Buffer.from(data, 'base64url'); } catch { return ''; }
+  const cs = (charset || 'utf-8').toLowerCase().replace(/["']/g, '').trim();
+  if (cs === 'utf-8' || cs === 'utf8' || cs === '') return buf.toString('utf8');
+  try {
+    // Node 内置 TextDecoder（full-icu）支持 gbk / gb2312 / gb18030 / big5 等
+    return new TextDecoder(cs.replace(/^x-/, '')).decode(buf);
+  } catch {
+    try { return buf.toString('utf8'); } catch { return ''; }
+  }
+}
+
+// 解码邮件头 RFC 2047 编码（=?charset?B?xxx?= / =?charset?Q?xxx?=）。
+// Gmail 对部分 UTF-8 头已解码，但 GB2312/Big5 的 RFC2047 仍可能原样返回，需手动解。
+function decodeRfc2047(str) {
+  if (!str || !str.includes('=?')) return str || '';
+  return str.replace(/=\?([^?]+)\?([BbQq])\?([^?]*)\?=/g, (_, cs, enc, data) => {
+    try {
+      const charset = cs.trim().toLowerCase();
+      let buf;
+      if (enc.toUpperCase() === 'B') buf = Buffer.from(data, 'base64');
+      else buf = Buffer.from(data.replace(/_/g, ' '), 'ascii'); // Q 编码用 _ 代空格
+      if (charset.includes('utf-8')) return buf.toString('utf8');
+      try { return new TextDecoder(charset.replace(/^x-/, '')).decode(buf); }
+      catch { return buf.toString('utf8'); }
+    } catch { return _; }
+  });
+}
+
+// 把 HTML 正文剥成纯文本（用于预览、避免整段 HTML 源码出现在列表/ timeline）。
+function stripHtml(html) {
+  if (!html) return '';
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// ---------- 从 payload 抽取正文 ----------
+// 优先返回 text/plain；只有 html 时返回纯文本化版本（stripHtml），避免预览出现整段 HTML 源码。
+// 每个 part 使用各自声明的 charset 解码，递归时向下传递。
+function extractText(payload, inheritedCharset) {
   if (!payload) return '';
+  const charset = inheritedCharset || getCharset(payload);
   if (payload.body && payload.body.data) {
-    try { return Buffer.from(payload.body.data, 'base64url').toString('utf8'); } catch { return ''; }
+    try { return decodeBytes(payload.body.data, charset); } catch { return ''; }
   }
   if (Array.isArray(payload.parts) && payload.parts.length) {
     let plain = '';
     let html = '';
     for (const p of payload.parts) {
-      if (p.mimeType === 'text/plain' && p.body && p.body.data) {
-        try { plain += Buffer.from(p.body.data, 'base64url').toString('utf8'); } catch { /* skip */ }
-      } else if (p.mimeType === 'text/html' && p.body && p.body.data) {
-        try { html += Buffer.from(p.body.data, 'base64url').toString('utf8'); } catch { /* skip */ }
+      const pCharset = getCharset(p);
+      if (p.mimeType && p.mimeType.startsWith('text/plain') && p.body && p.body.data) {
+        try { plain += decodeBytes(p.body.data, pCharset) + '\n'; } catch { /* skip */ }
+      } else if (p.mimeType && p.mimeType.startsWith('text/html') && p.body && p.body.data) {
+        try { html += decodeBytes(p.body.data, pCharset); } catch { /* skip */ }
       } else if (p.parts) {
-        const sub = extractText(p);
-        if (sub) plain += sub;
+        const sub = extractText(p, pCharset);
+        if (sub) plain += sub + '\n';
       }
     }
-    return plain || html || '';
+    return plain.trim() || stripHtml(html) || '';
   }
   return '';
 }
@@ -205,8 +272,8 @@ export async function fetchGmailMessages(opts = {}) {
         const h = headers.find(x => x.name.toLowerCase() === name.toLowerCase());
         return h ? h.value : '';
       };
-      const subject = getH('Subject');
-      const from = parseAddress(getH('From'));
+      const subject = decodeRfc2047(getH('Subject'));
+      const from = parseAddress(decodeRfc2047(getH('From')));
       const toList = parseAddressList(getH('To'));
       const dateStr = getH('Date');
       const body = extractText(m.payload);
@@ -224,7 +291,7 @@ export async function fetchGmailMessages(opts = {}) {
         from: { emailAddress: { address: from.address, name: from.name } },
         toRecipients: toList.map(a => ({ emailAddress: { address: a.address, name: a.name } })),
         receivedDateTime: received,
-        bodyPreview: body.replace(/\s+/g, ' ').slice(0, 280),
+        bodyPreview: stripHtml(body).replace(/\s+/g, ' ').slice(0, 280),
         _body: body,
       });
     }

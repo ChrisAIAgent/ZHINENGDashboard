@@ -340,9 +340,9 @@ async function getTicketDetail(auth, id) {
     };
   });
   const timeline = [
-    { at: t.open_date, event: 'Ticket created', actor: 'AI', note: `鐢?${t.email_count} 灏侀偖浠跺悎骞讹紝璇嗗埆涓?${t.category}` },
+    { at: t.open_date, event: 'Ticket created', actor: 'AI', note: `已合并 ${t.email_count} 封邮件，识别分类为 ${t.category}` },
     ...(t.owner_email
-      ? [{ at: t.open_date, event: 'Owner assigned', actor: 'AI', note: `鍒嗛厤缁?${t.owner_name}` }]
+      ? [{ at: t.open_date, event: 'Owner assigned', actor: 'AI', note: `已分配给 ${t.owner_name}` }]
       : []),
     { at: t.last_update, event: 'Latest update', actor: t.owner_name || 'System', note: t.next_action },
   ];
